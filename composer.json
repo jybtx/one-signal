@@ -1,0 +1,32 @@
+{
+    "name": "jybtx/one-signal",
+    "description": "One signal message push",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["OneSignal"],
+    "authors": [
+        {
+            "name": "jybtx",
+            "email": "2574034626@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jybtx\\OneSignal\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jybtx\\OneSignal\\Providers\\OneSignalServiceProvider"
+            ],
+            "aliases": {
+                "OneSignal": "Jybtx\\OneSignal\\Faceds\\OneSignalFacade"
+            }
+        }
+    },
+    "minimum-stability": "dev"
+}
