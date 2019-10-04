@@ -62,7 +62,7 @@ class OneSignalClient
         $fields = array(
 			'app_id'            => $this->appId,
 			'included_segments' => array('All'),
-			'send_after'        => $time . 'GMT+0800 (中国标准时间)',
+			'send_after'        => $time . config('app.timezone'),
 			'headings'          => array('en'=>$title),
 			'contents'          => array('en'=>$txt),
         );      
