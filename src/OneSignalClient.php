@@ -1,7 +1,5 @@
 <?php
-
 namespace Jybtx\OneSignal;
-
 
 class OneSignalClient
 {
@@ -13,10 +11,14 @@ class OneSignalClient
     const ENDPOINT_APPS = "/apps";
 
 
-    protected $appId = config('one-sigin.app_id');
-    protected $ApiKey = config('one-sigin.api_key');
-    protected $userAuthKey;
-    protected $additionalParams;
+    protected $appId;
+    protected $ApiKe;
+
+    public  function __construct($appId,$ApiKey)
+    {
+        $this->appId = $appId;
+        $this->ApiKey = $ApiKey;
+    }
 
     /**
      * 在注册的时候给用户注册一个消息推送ID
