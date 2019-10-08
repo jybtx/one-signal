@@ -18,7 +18,7 @@ ServiceProvider will be attached automatically
 
 #### Other
 
-In your `config/app.php` add `Jybtx\\OneSignal\\Providers\\OneSignalServiceProvider::class` to the end of the `providers` array:
+In your `config/app.php` add `Jybtx\OneSignal\Providers\OneSignalServiceProvider::class` to the end of the `providers` array:
 
 ```php
 'providers' => [
