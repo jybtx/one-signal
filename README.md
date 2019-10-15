@@ -33,7 +33,7 @@ In your `config/app.php` add `Jybtx\OneSignal\Providers\OneSignalServiceProvider
 Publish Configuration
 
 ```shell
-php artisan vendor:publish --provider "Jybtx\RsaCryptAes\Providers\CryptServiceProvider"
+php artisan vendor:publish --provider "Jybtx\OneSignal\Providers\OneSignalServiceProvider"
 ```
 
 ## Usage
