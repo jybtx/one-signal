@@ -42,16 +42,7 @@ class OneSignalClient
 			'tags'         => array("foo" => "app") 
         );
 
-        $return = self::getMethod($fields, self::getUrlMethod( self::ENDPOINT_PLAYERS ) );
-        
-        if ( $return->success != FALSE )
-        {
-            return $return->id;
-        }
-        else
-        {
-            return false;
-        }       
+        return self::getMethod($fields, self::getUrlMethod( self::ENDPOINT_PLAYERS ) );      
     }
     /**
      * 给所有用户发送消息
@@ -67,8 +58,8 @@ class OneSignalClient
 			'send_after'        => $time . config('app.timezone'),
 			'headings'          => array('en'=>$title),
 			'contents'          => array('en'=>$txt),
-            'data'              => $data,
-        );      
+        );
+        if ( !empty( $data ) ) $fields['data'] = $data;
         return self::getMethod($fields, self::getUrlMethod( self::ENDPOINT_NOTIFICATIONS ) );
     }
     /**
@@ -88,8 +79,8 @@ class OneSignalClient
 			'include_player_ids' => is_array( $users )?:[$users],
 			'headings'           => array('en'=>$title),
 			'contents'           => array('en'=>$txt),
-            'data'               => $data,
-        );        
+        );
+        if ( !empty( $data ) ) $fields['data'] = $data;
         return self::getMethod($fields, self::getUrlMethod( self::ENDPOINT_NOTIFICATIONS ) );
     }
     /**
