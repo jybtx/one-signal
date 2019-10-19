@@ -46,12 +46,12 @@ OneSignal::registerPlayerId($identifier,$device_type,$device_os='',$device_model
 
 ### Send messages to all users
 ```php
-OneSignal::sendMessageAllUsers($title,$txt,$time=null);
+OneSignal::sendMessageAllUsers($title,$txt,$time=null,$data = array());
 ```
 
 ### Based on OneSignal PlayerIds sending
 ```php
-OneSignal::sendMessageSomeUser($title,$txt,$users=array());
+OneSignal::sendMessageSomeUser($title,$txt,$users,$data = array());
 ```
 
 ### Cancellation notice
