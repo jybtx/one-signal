@@ -9,7 +9,7 @@ return [
 	|
 	|
 	*/
-    'app_id' => env('APP_ID','YOUR-APP-ID-HERE'),
+	'app_id' => env('APP_ID','YOUR-APP-ID-HERE'),
     /*
 	|--------------------------------------------------------------------------
 	| Rest API Key

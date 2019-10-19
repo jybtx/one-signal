@@ -59,7 +59,7 @@ class OneSignalClient
      * @param  [string] $txt   [推送消息主体内容]
      * @return [array]         [推送消息返回数据]
      */
-    public function sendMessageAllUsers($title,$txt,$time=null)
+    public function sendMessageAllUsers($title,$txt,$time=null,$data = array())
     {
         $fields = array(
 			'app_id'            => $this->appId,
@@ -67,23 +67,28 @@ class OneSignalClient
 			'send_after'        => $time . config('app.timezone'),
 			'headings'          => array('en'=>$title),
 			'contents'          => array('en'=>$txt),
+            'data'              => $data,
         );      
         return self::getMethod($fields, self::getUrlMethod( self::ENDPOINT_NOTIFICATIONS ) );
     }
     /**
      * 基于OneSignal PlayerIds发送
-     * @param  [string] $title [推送消息标题]
-     * @param  [string] $txt   [推送消息主体内容]
-     * @param  array  $users [要推送消息的人--可以是单人也可以是多人]
-     * @return [array]        [推送消息返回数据]
+     * @author jybtx
+     * @date   2019-10-19
+     * @param  [string]   $title [推送消息标题]
+     * @param  [string]   $txt   [推送消息主体内容]
+     * @param  array      $users [要推送消息的人--可以是单人也可以是多人]
+     * @param  array      $data  [自定义字段]
+     * @return [type]            [description]
      */
-    public function sendMessageSomeUser($title,$txt,$users=array())
+    public function sendMessageSomeUser($title,$txt,$users,$data = array())
     {
         $fields = array(
 			'app_id'             => $this->appId,
-			'include_player_ids' => $users,
+			'include_player_ids' => is_array( $users )?:[$users],
 			'headings'           => array('en'=>$title),
 			'contents'           => array('en'=>$txt),
+            'data'               => $data,
         );        
         return self::getMethod($fields, self::getUrlMethod( self::ENDPOINT_NOTIFICATIONS ) );
     }
