@@ -58,3 +58,18 @@ OneSignal::sendMessageSomeUser($title,$txt,$users,$data = array());
 ```php
 OneSignal::revokeMessage($notifId);
 ```
+
+### send Message For Tags
+```php
+OneSignal::sendMessageUsingTags($title,$txt, $tags, $url = NULL, $data = NULL, $buttons = NULL, $subtitle = NULL);
+```
+
+### View notifications
+```php
+OneSignal::getNotifications($limit = NULL, $offset = NULL, $kind = 1 );
+```
+
+### Generate a compressed CSV export of all of your current user data
+```php
+OneSignal::getAllUserToExportCsv();
+```
