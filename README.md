@@ -73,3 +73,5 @@ OneSignal::getNotifications($limit = NULL, $offset = NULL, $kind = 1 );
 ```php
 OneSignal::getAllUserToExportCsv();
 ```
+# License
+MIT

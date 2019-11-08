@@ -24,7 +24,7 @@ class OneSignalServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__."/../config/one-signal.php" => config_path('one-signal.php'),
-        ]);
+        ],'one-signal');
     }
     /**
      * Merge configuration.
