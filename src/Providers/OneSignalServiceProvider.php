@@ -7,7 +7,7 @@ use Jybtx\OneSignal\OneSignalClient;
 
 class OneSignalServiceProvider extends ServiceProvider
 {
-	
+
 	/**
      * Bootstrap any application services.
      *
@@ -49,17 +49,17 @@ class OneSignalServiceProvider extends ServiceProvider
             if ( is_null( $config ) ) {
                 $config = $app['config']['one-signal'] ?: $app['config']['one-signal::config'];
             }
-            return new OneSignalClient($config['app_id'], $config['api_key']);
+            return new OneSignalClient($config['app_id'], $config['api_key'], $config['signal_api_url']);
         });
     }
     /**
      * Register any application services.
-     *  
+     *
      * @return void
      */
     public function register()
     {
-        $this->configurePaths();        
+        $this->configurePaths();
         $this->getRegisterSingleton();
     }
 }

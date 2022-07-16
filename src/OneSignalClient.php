@@ -3,21 +3,20 @@ namespace Jybtx\OneSignal;
 
 class OneSignalClient
 {
-	
-	const API_URL = "https://onesignal.com/api/v1";
 
     const ENDPOINT_NOTIFICATIONS = "/notifications";
     const ENDPOINT_PLAYERS = "/players";
     const ENDPOINT_APPS = "/apps";
 
-
     protected $appId;
-    protected $ApiKe;
+    protected $ApiKey;
+    protected $ApiUrl;
 
-    public  function __construct($appId,$ApiKey)
+    public  function __construct($appId, $ApiKey, $ApiUrl)
     {
         $this->appId = $appId;
         $this->ApiKey = $ApiKey;
+        $this->ApiUrl = $ApiUrl;
     }
 
     /**
@@ -28,21 +27,21 @@ class OneSignalClient
      * @param  [type] $device_model [推荐的设备品牌和型号。例：iPhone5,1]
      * @return [type]               [description]
      */
-    public function registerPlayerId($identifier,$device_type,$tags=NULL,$version='1.0',$device_os='',$device_model='')
+    public function registerPlayerId($identifier, $device_type, $tags=NULL, $version='1.0', $device_os='', $device_model='')
     {
-        $fields = array( 
-			'app_id'       => $this->appId, 
-			'identifier'   => $identifier, 
-			'language'     => config('app.locale'), 
-			'timezone'     => config('app.timezone'), 
-			'game_version' => $version, 
-			'device_os'    => $device_os, 
-			'device_type'  => $device_type, 
-			'device_model' => $device_model, 
+        $fields = array(
+			'app_id'       => $this->appId,
+			'identifier'   => $identifier,
+			'language'     => config('app.locale'),
+			'timezone'     => config('app.timezone'),
+			'game_version' => $version,
+			'device_os'    => $device_os,
+			'device_type'  => $device_type,
+			'device_model' => $device_model,
         );
         if ( isset($tags) ) $fields['tags'] = $tags;
 
-        return self::getMethod($fields, self::getUrlMethod( self::ENDPOINT_PLAYERS ) );      
+        return self::getMethod($fields, self::getUrlMethod( self::ENDPOINT_PLAYERS ) );
     }
     /**
      * 给所有用户发送消息
@@ -50,7 +49,7 @@ class OneSignalClient
      * @param  [string] $txt   [推送消息主体内容]
      * @return [array]         [推送消息返回数据]
      */
-    public function sendMessageAllUsers($title,$txt,$time=NULL,$data = array(),$url = NULL, $buttons = NULL)
+    public function sendMessageAllUsers($title, $txt, $time=NULL, $data = array(), $url = NULL, $buttons = NULL)
     {
         $fields = array(
 			'app_id'            => $this->appId,
@@ -74,11 +73,11 @@ class OneSignalClient
      * @param  array      $data  [自定义字段]
      * @return [type]            [description]
      */
-    public function sendMessageSomeUser($title,$txt,$users,$data = array(),$url = NULL,$buttons = NULL)
+    public function sendMessageSomeUser($title, $txt, $users, $data = array(), $url = NULL, $buttons = NULL)
     {
         $fields = array(
 			'app_id'             => $this->appId,
-			'include_player_ids' => is_array( $users )?:array($users),
+			'include_player_ids' => is_array( $users )? $users : array($users),
 			'headings'           => array('en'=>$title),
 			'contents'           => array('en'=>$txt),
         );
@@ -100,7 +99,7 @@ class OneSignalClient
      * @param  [type]     $subtitle [description]
      * @return [type]               [description]
      */
-    public function sendMessageUsingTags($title,$txt, $tags, $url = NULL, $data = NULL, $buttons = NULL, $subtitle = NULL)
+    public function sendMessageUsingTags($title, $txt, $tags, $url = NULL, $data = NULL, $buttons = NULL, $subtitle = NULL)
     {
         $fields = array(
             'app_id'   => $this->appId,
@@ -166,9 +165,9 @@ class OneSignalClient
      * @param  [type]     $url    [description]
      * @return [type]             [description]
      */
-    public function getMethod($fields,$url,$method = NULL)
+    public function getMethod($fields, $url, $method = NULL)
     {
-    	$fields = json_encode($fields);     
+    	$fields = json_encode($fields);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -185,7 +184,7 @@ class OneSignalClient
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 
         $response = curl_exec($ch);
-        curl_close($ch);        
+        curl_close($ch);
         $data = json_decode($response, true);
         return $data;
     }
@@ -198,7 +197,7 @@ class OneSignalClient
      */
     public function getUrlMethod($endPoint)
     {
-    	return self::API_URL . $endPoint;
+    	return $this->ApiUrl . $endPoint;
     }
 
 

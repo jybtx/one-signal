@@ -9,7 +9,7 @@ return [
 	|
 	|
 	*/
-	'app_id' => env('APP_ID','YOUR-APP-ID-HERE'),
+	'app_id' => env('APP_ID', 'YOUR-APP-ID-HERE'),
     /*
 	|--------------------------------------------------------------------------
 	| Rest API Key
@@ -18,7 +18,14 @@ return [
     |
 	|
 	*/
-    'api_key' => env('API_KEY','YOUR-API-KEY'),
-
-
+    'api_key' => env('API_KEY', 'YOUR-API-KEY'),
+    /*
+	|--------------------------------------------------------------------------
+	| One signal api url
+	|--------------------------------------------------------------------------
+	|
+    |
+	|
+	*/
+    'signal_api_url' => env('SIGNAL_API_URL', 'https://onesignal.com/api/v1'),
 ];
