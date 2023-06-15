@@ -23,7 +23,7 @@ class OneSignalServiceProvider extends ServiceProvider
     private function configurePaths()
     {
         $this->publishes([
-            __DIR__."/../config/one-signal.php" => config_path('one-signal.php'),
+            __DIR__."../../config/one-signal.php" => config_path('one-signal.php'),
         ],'one-signal');
     }
     /**
@@ -32,7 +32,7 @@ class OneSignalServiceProvider extends ServiceProvider
     private function mergeConfig()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/one-signal.php', 'one-signal'
+            __DIR__.'../../config/one-signal.php', 'one-signal'
         );
     }
     /**
